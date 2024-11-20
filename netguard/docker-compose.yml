@@ -1,0 +1,10 @@
+services:
+  netguard:
+    container_name: netguard
+    image: sgrtye/netguard:latest
+    restart: unless-stopped
+    environment:
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+      - SENDER_EMAIL=${SENDER_EMAIL}
+      - RECIPIENT_EMAIL=${RECIPIENT_EMAIL}
+      - HOST_NAME=${HOST_NAME}

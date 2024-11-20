@@ -1,0 +1,11 @@
+services:
+  telebot:
+    container_name: telebot
+    image: sgrtye/telebot:latest
+    restart: unless-stopped
+    volumes:
+      - ${DOCKER_SOCK}:/var/run/docker.sock
+    environment:
+      - TELEBOT_TOKEN=${TELEBOT_TOKEN}
+      - NOVEL_URL=${NOVEL_URL}
+      - GLANCES_URL=${GLANCES_URL}

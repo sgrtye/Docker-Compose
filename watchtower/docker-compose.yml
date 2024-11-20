@@ -1,0 +1,16 @@
+services:
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower:latest
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    volumes:
+      - ${DOCKER_SOCK}:/var/run/docker.sock
+      - ${DOCKER_CONFIG}:/config.json
+    environment:
+      - TZ=${TZ}
+      - WATCHTOWER_CLEANUP=${WATCHTOWER_CLEANUP}
+      - WATCHTOWER_SCHEDULE=${WATCHTOWER_SCHEDULE}
+      - WATCHTOWER_HTTP_API_METRICS=${WATCHTOWER_HTTP_API_METRICS}
+      - WATCHTOWER_HTTP_API_TOKEN=${WATCHTOWER_HTTP_API_TOKEN}

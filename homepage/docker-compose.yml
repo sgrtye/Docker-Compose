@@ -1,0 +1,11 @@
+services:
+  homepage:
+    container_name: homepage
+    image: ghcr.io/gethomepage/homepage:latest
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    volumes:
+      - ${DOCKER_SOCK}:/var/run/docker.sock:ro
+      - ${HOMEPAGE_CONFIG_PATH}:/app/config
+      - ${HOMEPAGE_IMAGE_PATH}:/app/public/images

@@ -1,0 +1,12 @@
+services:
+  tunnel-ipv6:
+    container_name: tunnel-ipv6
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel run
+    network_mode: host
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+      - TUNNEL_TRANSPORT_PROTOCOL=${TUNNEL_TRANSPORT_PROTOCOL}
+      - TUNNEL_EDGE_IP_VERSION=${TUNNEL_EDGE_IP_VERSION}
+      - TUNNEL_REGION=${TUNNEL_REGION}

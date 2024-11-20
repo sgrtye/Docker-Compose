@@ -1,0 +1,17 @@
+services:
+  novel:
+    container_name: novel
+    image: sgrtye/novel:latest
+    ports:
+      - 8008:80
+    volumes:
+      - cache:/cache
+      - ${NOVEL_CONFIG_PATH}:/config
+    environment:
+      - TELEBOT_TOKEN=${TELEBOT_TOKEN}
+      - TELEBOT_USER_ID=${TELEBOT_USER_ID}
+      - BOOK_URL=${BOOK_URL}
+      - PROXY_URL=${PROXY_URL}
+
+volumes:
+  cache:

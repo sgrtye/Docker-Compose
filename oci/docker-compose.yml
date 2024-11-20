@@ -1,0 +1,6 @@
+services:
+  oci:
+    container_name: oci
+    image: sgrtye/oci:latest
+    volumes:
+      - ${OCI_ENV_PATH}:/app/env

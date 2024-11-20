@@ -1,0 +1,13 @@
+services:
+  2fauth:
+    container_name: 2fauth
+    image: 2fauth/2fauth:latest
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    volumes:
+      - ${2FAUTH_DATA_PATH}:/2fauth
+    environment:
+      - TRUSTED_PROXIES=${TRUSTED_PROXIES}
+      - APP_URL=${APP_URL}
+      - ASSET_URL=${ASSET_URL}

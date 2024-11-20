@@ -1,0 +1,15 @@
+services:
+  apiserver:
+    container_name: apiserver
+    image: sgrtye/apiserver:latest
+    restart: unless-stopped
+    ports:
+      - 8888:80
+    volumes:
+      - cache:/cache
+    environment:
+      - XUI_USERNAME=${XUI_USERNAME}
+      - XUI_PASSWORD=${XUI_PASSWORD}
+      - XUI_URL=${XUI_URL}
+volumes:
+  cache:
