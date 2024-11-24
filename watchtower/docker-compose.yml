@@ -7,7 +7,7 @@ services:
       - 8080:8080
     volumes:
       - ${DOCKER_SOCK}:/var/run/docker.sock
-      - ${DOCKER_CONFIG}:/config.json
+      - ${DOCKER_CONFIG}:/config.json:ro
     environment:
       - TZ=${TZ}
       - WATCHTOWER_CLEANUP=${WATCHTOWER_CLEANUP}
