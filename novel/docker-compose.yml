@@ -17,7 +17,9 @@ services:
       - PROXY_URL=${PROXY_URL}
     labels:
       - traefik.enable=true
+      - traefik.docker.network=gateway
       - traefik.http.services.novel.loadbalancer.server.port=80
+      - traefik.http.services.novel.loadbalancer.server.scheme=http
       - traefik.http.routers.novel-http.entrypoints=http
       - traefik.http.routers.novel-http.rule=${HOST_RULE}
       - traefik.http.routers.novel-https.entrypoints=https
