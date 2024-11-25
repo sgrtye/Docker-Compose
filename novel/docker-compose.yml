@@ -3,8 +3,8 @@ services:
     container_name: novel
     image: sgrtye/novel:latest
     restart: unless-stopped
-    ports:
-      - 8008:80
+    # ports:
+    #   - 8008:80
     networks:
       - gateway
     volumes:
