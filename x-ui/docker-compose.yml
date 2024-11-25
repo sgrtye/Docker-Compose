@@ -4,7 +4,7 @@ services:
     image: alireza7/x-ui:latest
     hostname: ${XUI_HOSTNAME}
     restart: unless-stopped
-    network:
+    networks:
       - x-ui
     volumes:
       - ${XUI_DATABASE_PATH}:/etc/x-ui:rw
@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
     ports:
       - 8088:80
-    network:
+    networks:
       - x-ui
       - gateway
     volumes:
@@ -38,7 +38,7 @@ services:
     container_name: submanager
     image: sgrtye/submanager:latest
     restart: unless-stopped
-    network:
+    networks:
       - x-ui
     volumes:
       - ${SUB_PATH}:/sub:rw

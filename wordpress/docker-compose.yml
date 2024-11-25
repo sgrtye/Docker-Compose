@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     ports:
       - 80:80
-    network:
+    networks:
       - wordpress
       - gateway
     volumes:
@@ -30,7 +30,7 @@ services:
     container_name: database
     image: mariadb:latest
     restart: unless-stopped
-    network:
+    networks:
       - wordpress
     volumes: 
       - ${MYSQL_PATH}:/var/lib/mysql:rw
@@ -44,7 +44,7 @@ services:
     container_name: redis
     image: redis:latest
     restart: unless-stopped
-    network:
+    networks:
       - wordpress
     volumes: 
       - ${REDIS_PATH}:/data:rw
