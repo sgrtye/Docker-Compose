@@ -6,7 +6,6 @@ services:
     ports:
       - 8008:80
     networks:
-      - novel
       - gateway
     volumes:
       - cache:/cache:rw
@@ -30,7 +29,5 @@ volumes:
   cache:
 
 networks:
-  novel:
-    driver: bridge
   gateway:
     external: true
