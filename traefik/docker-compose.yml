@@ -9,6 +9,8 @@ services:
       # - 8080:8080
     networks:
       - gateway
+    extra_hosts:
+      - host.docker.internal:host-gateway
     volumes:
       - ${DOCKER_SOCK}:/run/docker.sock:ro
       - ${TRAEFIK_CONFIG_PATH}:/etc/traefik/traefik.yaml:ro
