@@ -9,7 +9,7 @@ services:
       - wordpress
       - gateway
     volumes:
-      - ${HTML_PATH}:/var/www/html
+      - ${HTML_PATH}:/var/www/html:rw
     environment:
       - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
       - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
@@ -24,7 +24,7 @@ services:
     network:
       - wordpress
     volumes: 
-      - ${MYSQL_PATH}:/var/lib/mysql
+      - ${MYSQL_PATH}:/var/lib/mysql:rw
     environment:
       - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
       - MYSQL_USER=${WORDPRESS_DB_USER}
@@ -38,7 +38,7 @@ services:
     network:
       - wordpress
     volumes: 
-      - ${REDIS_PATH}:/data
+      - ${REDIS_PATH}:/data:rw
 
 networks:
   wordpress:

@@ -9,8 +9,8 @@ services:
       - novel
       - gateway
     volumes:
-      - cache:/cache
-      - ${NOVEL_CONFIG_PATH}:/config
+      - cache:/cache:rw
+      - ${NOVEL_CONFIG_PATH}:/config:ro
     environment:
       - TELEBOT_TOKEN=${TELEBOT_TOKEN}
       - TELEBOT_USER_ID=${TELEBOT_USER_ID}

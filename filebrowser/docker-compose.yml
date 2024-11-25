@@ -9,8 +9,8 @@ services:
       - filebrowser
       - gateway
     volumes:
-      - ${FILEBROWSER_FILE_PATH}:/srv
-      - ${FILEBROWSER_DATABASE_PATH}:/database.db
+      - ${FILEBROWSER_FILE_PATH}:/srv:rw
+      - ${FILEBROWSER_DATABASE_PATH}:/database.db:rw
     environment:
       - TZ=${TZ}
 

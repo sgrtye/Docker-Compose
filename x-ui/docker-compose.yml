@@ -7,7 +7,7 @@ services:
     network:
       - x-ui
     volumes:
-      - ${XUI_DATABASE_PATH}:/etc/x-ui
+      - ${XUI_DATABASE_PATH}:/etc/x-ui:rw
     environment:
       - TZ=${TZ}
       - XRAY_VMESS_AEAD_FORCED=${XRAY_VMESS_AEAD_FORCED}
@@ -22,8 +22,8 @@ services:
       - x-ui
       - external
     volumes:
-      - ${HTML_PATH}:/var/www/html
-      - ${NGINX_CONFIG_PATH}:/etc/nginx/conf.d
+      - ${HTML_PATH}:/var/www/html:ro
+      - ${NGINX_CONFIG_PATH}:/etc/nginx/conf.d:ro
 
   submanager:
     container_name: submanager
@@ -32,8 +32,8 @@ services:
     network:
       - x-ui
     volumes:
-      - ${SUB_PATH}:/sub
-      - ${NGINX_CONFIG_PATH}:/conf.d
+      - ${SUB_PATH}:/sub:rw
+      - ${NGINX_CONFIG_PATH}:/conf.d:rw
     environment:
       - XUI_USERNAME=${XUI_USERNAME}
       - XUI_PASSWORD=${XUI_PASSWORD}

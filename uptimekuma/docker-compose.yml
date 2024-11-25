@@ -9,7 +9,7 @@ services:
       - uptimekuma
       - gateway
     volumes:
-      - ${UPTIMEKUMA_DATA_PATH}:/app/data
+      - ${UPTIMEKUMA_DATA_PATH}:/app/data:rw
 
 networks:
   uptimekuma:

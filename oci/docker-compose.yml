@@ -6,7 +6,7 @@ services:
     networks:
       - oci
     volumes:
-      - ${OCI_ENV_PATH}:/app/env
+      - ${OCI_ENV_PATH}:/app/env:ro
 
 networks:
   oci:

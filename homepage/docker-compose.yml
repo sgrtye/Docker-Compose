@@ -10,8 +10,8 @@ services:
       - gateway
     volumes:
       - ${DOCKER_SOCK}:/var/run/docker.sock:ro
-      - ${HOMEPAGE_CONFIG_PATH}:/app/config
-      - ${HOMEPAGE_IMAGE_PATH}:/app/public/images
+      - ${HOMEPAGE_CONFIG_PATH}:/app/config:ro
+      - ${HOMEPAGE_IMAGE_PATH}:/app/public/images:ro
 
 networks:
   homepage:

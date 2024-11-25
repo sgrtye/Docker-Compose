@@ -9,7 +9,7 @@ services:
       - watchtower
       - gateway
     volumes:
-      - ${DOCKER_SOCK}:/var/run/docker.sock
+      - ${DOCKER_SOCK}:/var/run/docker.sock:rw
       - ${DOCKER_CONFIG_PATH}:/config.json:ro
     environment:
       - TZ=${TZ}

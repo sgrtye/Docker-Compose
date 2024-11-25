@@ -9,7 +9,7 @@ services:
       - apiserver
       - gateway
     volumes:
-      - cache:/cache
+      - cache:/cache:rw
     environment:
       - XUI_USERNAME=${XUI_USERNAME}
       - XUI_PASSWORD=${XUI_PASSWORD}
