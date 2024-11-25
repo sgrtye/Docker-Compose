@@ -6,7 +6,6 @@ services:
     ports:
       - 88:80
     networks:
-      - wordpress
       - gateway
     volumes:
       - ${HTML_PATH}:/var/www/html:rw
@@ -30,8 +29,6 @@ services:
     container_name: database
     image: mariadb:latest
     restart: unless-stopped
-    networks:
-      - wordpress
     volumes: 
       - ${MYSQL_PATH}:/var/lib/mysql:rw
     environment:
@@ -44,13 +41,9 @@ services:
     container_name: redis
     image: redis:latest
     restart: unless-stopped
-    networks:
-      - wordpress
     volumes: 
       - ${REDIS_PATH}:/data:rw
 
 networks:
-  wordpress:
-    driver: bridge
   gateway:
     external: true

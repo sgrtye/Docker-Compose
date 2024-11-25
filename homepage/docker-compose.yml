@@ -6,7 +6,6 @@ services:
     ports:
       - 3000:3000
     networks:
-      - homepage
       - gateway
     volumes:
       - ${DOCKER_SOCK}:/var/run/docker.sock:ro
@@ -23,7 +22,5 @@ services:
       - traefik.http.routers.homepage-https.tls.certresolver=cloudflare
 
 networks:
-  homepage:
-    driver: bridge
   gateway:
     external: true

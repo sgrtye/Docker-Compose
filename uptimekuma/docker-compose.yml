@@ -6,7 +6,6 @@ services:
     ports:
       - 3001:3001
     networks:
-      - uptimekuma
       - gateway
     volumes:
       - ${UPTIMEKUMA_DATA_PATH}:/app/data:rw
@@ -21,7 +20,5 @@ services:
       - traefik.http.routers.uptimekuma-https.tls.certresolver=cloudflare
 
 networks:
-  uptimekuma:
-    driver: bridge
   gateway:
     external: true

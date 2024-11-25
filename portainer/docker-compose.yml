@@ -6,7 +6,6 @@ services:
     ports:
       - 9443:9443
     networks:
-      - portainer
       - gateway
     volumes:
       - ${DOCKER_SOCK}:/var/run/docker.sock:rw
@@ -22,7 +21,5 @@ services:
       - traefik.http.routers.portainer-https.tls.certresolver=cloudflare
 
 networks:
-  portainer:
-    driver: bridge
   gateway:
     external: true

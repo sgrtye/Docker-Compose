@@ -4,8 +4,6 @@ services:
     image: alireza7/x-ui:latest
     hostname: ${XUI_HOSTNAME}
     restart: unless-stopped
-    networks:
-      - xui
     volumes:
       - ${XUI_DATABASE_PATH}:/etc/x-ui:rw
     environment:
@@ -19,7 +17,6 @@ services:
     ports:
       - 8088:80
     networks:
-      - xui
       - gateway
     volumes:
       - ${HTML_PATH}:/var/www/html:ro
@@ -38,8 +35,6 @@ services:
     container_name: submanager
     image: sgrtye/submanager:latest
     restart: unless-stopped
-    networks:
-      - xui
     volumes:
       - ${SUB_PATH}:/sub:rw
       - ${NGINX_CONFIG_PATH}:/conf.d:rw
@@ -51,7 +46,5 @@ services:
       - MITCE_URL=${MITCE_URL}
 
 networks:
-  xui:
-    driver: bridge
   gateway:
     external: true

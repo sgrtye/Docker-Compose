@@ -6,7 +6,6 @@ services:
     ports:
       - 8888:80
     networks:
-      - apiserver
       - gateway
     volumes:
       - cache:/cache:rw
@@ -28,7 +27,5 @@ volumes:
   cache:
 
 networks:
-  apiserver:
-    driver: bridge
   gateway:
     external: true

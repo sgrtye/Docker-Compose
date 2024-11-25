@@ -6,7 +6,6 @@ services:
     ports:
       - 8080:8080
     networks:
-      - watchtower
       - gateway
     volumes:
       - ${DOCKER_SOCK}:/var/run/docker.sock:rw
@@ -28,7 +27,5 @@ services:
       - traefik.http.routers.watchtower-https.tls.certresolver=cloudflare
 
 networks:
-  watchtower:
-    driver: bridge
   gateway:
     external: true

@@ -6,7 +6,6 @@ services:
     ports:
       - 8000:8000
     networks:
-      - 2fauth
       - gateway
     volumes:
       - ${AUTH_DATA_PATH}:/2fauth:rw
@@ -25,7 +24,5 @@ services:
       - traefik.http.routers.2fauth-https.tls.certresolver=cloudflare
 
 networks:
-  2fauth:
-    driver: bridge
   gateway:
     external: true

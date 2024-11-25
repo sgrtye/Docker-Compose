@@ -3,15 +3,9 @@ services:
     container_name: telebot
     image: sgrtye/telebot:latest
     restart: unless-stopped
-    networks:
-      - telebot
     volumes:
       - ${DOCKER_SOCK}:/var/run/docker.sock:rw
     environment:
       - TELEBOT_TOKEN=${TELEBOT_TOKEN}
       - NOVEL_URL=${NOVEL_URL}
       - GLANCES_URL=${GLANCES_URL}
-
-networks:
-  telebot:
-    driver: bridge
