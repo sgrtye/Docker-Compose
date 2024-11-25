@@ -1,0 +1,16 @@
+services:
+  portainer-ee:
+    container_name: portainer
+    image: portainer/portainer-ee:sts
+    restart: unless-stopped
+    ports:
+      - 9443:9443
+    networks:
+      - portainer
+    volumes:
+      - ${DOCKER_SOCK}:/var/run/docker.sock:rw
+      - ${PORTAINER_DATA_PATH}:/data:rw
+
+networks:
+  portainer:
+    driver: bridge
