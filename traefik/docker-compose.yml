@@ -10,7 +10,7 @@ services:
     networks:
       - gateway
     extra_hosts:
-      - host.docker.internal:host-gateway
+      - host.docker.internal:127.0.0.1
     volumes:
       - ${DOCKER_SOCK}:/run/docker.sock:ro
       - ${TRAEFIK_CONFIG_PATH}:/etc/traefik/traefik.yaml:ro
