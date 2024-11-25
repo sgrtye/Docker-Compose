@@ -4,7 +4,7 @@ services:
     image: wordpress:latest
     restart: unless-stopped
     ports:
-      - 80:80
+      - 88:80
     networks:
       - wordpress
       - gateway
