@@ -1,20 +1,40 @@
 services:
   traefik:
-    image: traefik:v3
     container_name: traefik
+    image: traefik:v3
+    restart: unless-stopped
     ports:
       - 80:80
       - 443:443
-      - 8080:8080
+      # - 8080:8080
+    networks:
+      - gateway
     volumes:
       - ${DOCKER_SOCK}:/run/docker.sock:ro
       - ${TRAEFIK_CONFIG_PATH}:/etc/traefik/traefik.yaml:ro
       - ${TRAEFIK_CERTS_PATH}:/var/traefik/certs:rw
     environment:
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
-    networks:
-      - gateway
-    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_DASHBOARD_CREDENTIALS}
+      - traefik.http.services.traefik.loadbalancer.server.port=8080
+      - traefik.http.routers.traefik-http.entrypoints=http
+      - traefik.http.routers.traefik-http.rule=${HOST_RULE}
+      - traefik.http.routers.traefik-https.entrypoints=https
+      - traefik.http.routers.traefik-https.rule=${HOST_RULE}
+      - traefik.http.routers.traefik-https.middlewares=traefik-auth
+      - traefik.http.routers.traefik-https.tls=true
+      - traefik.http.routers.traefik-https.tls.certresolver=cloudflare
+      - traefik.http.routers.traefik-https.tls.domains[0].main=${DOMAIN_0}
+      - traefik.http.routers.traefik-https.tls.domains[1].main=${DOMAIN_1}
+      - traefik.http.routers.traefik-https.tls.domains[2].main=${DOMAIN_2}
+      - traefik.http.routers.traefik-https.tls.domains[3].main=${DOMAIN_3}
+      - traefik.http.routers.traefik-https.tls.domains[0].sans=*.${DOMAIN_0}
+      - traefik.http.routers.traefik-https.tls.domains[1].sans=*.${DOMAIN_1}
+      - traefik.http.routers.traefik-https.tls.domains[2].sans=*.${DOMAIN_2}
+      - traefik.http.routers.traefik-https.tls.domains[3].sans=*.${DOMAIN_3}
+      - traefik.http.routers.traefik-https.service=api@internal
 
 networks:
   gateway:
