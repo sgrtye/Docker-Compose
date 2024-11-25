@@ -20,7 +20,7 @@ services:
       - 8088:80
     network:
       - x-ui
-      - external
+      - gateway
     volumes:
       - ${HTML_PATH}:/var/www/html:ro
       - ${NGINX_CONFIG_PATH}:/etc/nginx/conf.d:ro
