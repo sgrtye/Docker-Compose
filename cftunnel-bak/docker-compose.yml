@@ -1,6 +1,6 @@
 services:
-  tunnel-ipv6:
-    container_name: tunnel-ipv6
+  cftunnel-bak:
+    container_name: cftunnel-bak
     image: cloudflare/cloudflared:latest
     restart: unless-stopped
     command: tunnel run
