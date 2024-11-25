@@ -5,11 +5,21 @@ services:
     restart: unless-stopped
     ports:
       - 8888:80
+    networks:
+      - apiserver
+      - gateway
     volumes:
       - cache:/cache
     environment:
       - XUI_USERNAME=${XUI_USERNAME}
       - XUI_PASSWORD=${XUI_PASSWORD}
       - XUI_URL=${XUI_URL}
+
 volumes:
   cache:
+
+networks:
+  apiserver:
+    driver: bridge
+  gateway:
+    external: true

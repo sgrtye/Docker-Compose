@@ -5,7 +5,16 @@ services:
     restart: unless-stopped
     ports:
       - 3000:3000
+    networks:
+      - homepage
+      - gateway
     volumes:
       - ${DOCKER_SOCK}:/var/run/docker.sock:ro
       - ${HOMEPAGE_CONFIG_PATH}:/app/config
       - ${HOMEPAGE_IMAGE_PATH}:/app/public/images
+
+networks:
+  homepage:
+    driver: bridge
+  gateway:
+    external: true

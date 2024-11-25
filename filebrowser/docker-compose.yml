@@ -5,8 +5,17 @@ services:
     restart: unless-stopped
     ports:
       - 8800:80
+    networks:
+      - filebrowser
+      - gateway
     volumes:
       - ${FILEBROWSER_FILE_PATH}:/srv
       - ${FILEBROWSER_DATABASE_PATH}:/database.db
     environment:
       - TZ=${TZ}
+
+networks:
+  filebrowser:
+    driver: bridge
+  gateway:
+    external: true

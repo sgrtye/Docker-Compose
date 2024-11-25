@@ -5,6 +5,9 @@ services:
     restart: unless-stopped
     ports:
       - 8080:8080
+    network:
+      - watchtower
+      - gateway
     volumes:
       - ${DOCKER_SOCK}:/var/run/docker.sock
       - ${DOCKER_CONFIG_PATH}:/config.json:ro
@@ -14,3 +17,9 @@ services:
       - WATCHTOWER_SCHEDULE=${WATCHTOWER_SCHEDULE}
       - WATCHTOWER_HTTP_API_METRICS=${WATCHTOWER_HTTP_API_METRICS}
       - WATCHTOWER_HTTP_API_TOKEN=${WATCHTOWER_HTTP_API_TOKEN}
+
+networks:
+  watchtower:
+    driver: bridge
+  gateway:
+    external: true
