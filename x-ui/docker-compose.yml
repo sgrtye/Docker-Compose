@@ -24,6 +24,15 @@ services:
     volumes:
       - ${HTML_PATH}:/var/www/html:ro
       - ${NGINX_CONFIG_PATH}:/etc/nginx/conf.d:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.x-ui.loadbalancer.server.port=80
+      - traefik.http.routers.x-ui-http.entrypoints=http
+      - traefik.http.routers.x-ui-http.rule=${HOST_RULE}
+      - traefik.http.routers.x-ui-https.entrypoints=https
+      - traefik.http.routers.x-ui-https.rule=${HOST_RULE}
+      - traefik.http.routers.x-ui-https.tls=true
+      - traefik.http.routers.x-ui-https.tls.certresolver=cloudflare
 
   submanager:
     container_name: submanager

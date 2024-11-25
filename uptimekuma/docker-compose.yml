@@ -10,6 +10,15 @@ services:
       - gateway
     volumes:
       - ${UPTIMEKUMA_DATA_PATH}:/app/data:rw
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.uptimekuma.loadbalancer.server.port=3001
+      - traefik.http.routers.uptimekuma-http.entrypoints=http
+      - traefik.http.routers.uptimekuma-http.rule=${HOST_RULE}
+      - traefik.http.routers.uptimekuma-https.entrypoints=https
+      - traefik.http.routers.uptimekuma-https.rule=${HOST_RULE}
+      - traefik.http.routers.uptimekuma-https.tls=true
+      - traefik.http.routers.uptimekuma-https.tls.certresolver=cloudflare
 
 networks:
   uptimekuma:

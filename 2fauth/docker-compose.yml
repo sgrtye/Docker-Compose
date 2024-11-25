@@ -14,6 +14,15 @@ services:
       - TRUSTED_PROXIES=${TRUSTED_PROXIES}
       - APP_URL=${APP_URL}
       - ASSET_URL=${ASSET_URL}
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.2fauth.loadbalancer.server.port=8000
+      - traefik.http.routers.2fauth-http.entrypoints=http
+      - traefik.http.routers.2fauth-http.rule=${HOST_RULE}
+      - traefik.http.routers.2fauth-https.entrypoints=https
+      - traefik.http.routers.2fauth-https.rule=${HOST_RULE}
+      - traefik.http.routers.2fauth-https.tls=true
+      - traefik.http.routers.2fauth-https.tls.certresolver=cloudflare
 
 networks:
   2fauth:

@@ -12,6 +12,15 @@ services:
       - ${DOCKER_SOCK}:/var/run/docker.sock:ro
       - ${HOMEPAGE_CONFIG_PATH}:/app/config:ro
       - ${HOMEPAGE_IMAGE_PATH}:/app/public/images:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.homepage.loadbalancer.server.port=3000
+      - traefik.http.routers.homepage-http.entrypoints=http
+      - traefik.http.routers.homepage-http.rule=${HOST_RULE}
+      - traefik.http.routers.homepage-https.entrypoints=https
+      - traefik.http.routers.homepage-https.rule=${HOST_RULE}
+      - traefik.http.routers.homepage-https.tls=true
+      - traefik.http.routers.homepage-https.tls.certresolver=cloudflare
 
 networks:
   homepage:

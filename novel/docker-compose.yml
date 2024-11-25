@@ -16,6 +16,15 @@ services:
       - TELEBOT_USER_ID=${TELEBOT_USER_ID}
       - BOOK_URL=${BOOK_URL}
       - PROXY_URL=${PROXY_URL}
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.novel.loadbalancer.server.port=80
+      - traefik.http.routers.novel-http.entrypoints=http
+      - traefik.http.routers.novel-http.rule=${HOST_RULE}
+      - traefik.http.routers.novel-https.entrypoints=https
+      - traefik.http.routers.novel-https.rule=${HOST_RULE}
+      - traefik.http.routers.novel-https.tls=true
+      - traefik.http.routers.novel-https.tls.certresolver=cloudflare
 
 volumes:
   cache:

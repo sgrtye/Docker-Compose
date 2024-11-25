@@ -14,6 +14,15 @@ services:
       - XUI_USERNAME=${XUI_USERNAME}
       - XUI_PASSWORD=${XUI_PASSWORD}
       - XUI_URL=${XUI_URL}
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.apiserver.loadbalancer.server.port=80
+      - traefik.http.routers.apiserver-http.entrypoints=http
+      - traefik.http.routers.apiserver-http.rule=${HOST_RULE}
+      - traefik.http.routers.apiserver-https.entrypoints=https
+      - traefik.http.routers.apiserver-https.rule=${HOST_RULE}
+      - traefik.http.routers.apiserver-https.tls=true
+      - traefik.http.routers.apiserver-https.tls.certresolver=cloudflare
 
 volumes:
   cache:

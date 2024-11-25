@@ -1,5 +1,5 @@
 services:
-  portainer-ee:
+  portainer:
     container_name: portainer
     image: portainer/portainer-ee:sts
     restart: unless-stopped
@@ -11,6 +11,15 @@ services:
     volumes:
       - ${DOCKER_SOCK}:/var/run/docker.sock:rw
       - ${PORTAINER_DATA_PATH}:/data:rw
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.portainer.loadbalancer.server.port=9443
+      - traefik.http.routers.portainer-http.entrypoints=http
+      - traefik.http.routers.portainer-http.rule=${HOST_RULE}
+      - traefik.http.routers.portainer-https.entrypoints=https
+      - traefik.http.routers.portainer-https.rule=${HOST_RULE}
+      - traefik.http.routers.portainer-https.tls=true
+      - traefik.http.routers.portainer-https.tls.certresolver=cloudflare
 
 networks:
   portainer:

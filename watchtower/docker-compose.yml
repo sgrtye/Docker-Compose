@@ -17,6 +17,15 @@ services:
       - WATCHTOWER_SCHEDULE=${WATCHTOWER_SCHEDULE}
       - WATCHTOWER_HTTP_API_METRICS=${WATCHTOWER_HTTP_API_METRICS}
       - WATCHTOWER_HTTP_API_TOKEN=${WATCHTOWER_HTTP_API_TOKEN}
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.watchtower.loadbalancer.server.port=8080
+      - traefik.http.routers.watchtower-http.entrypoints=http
+      - traefik.http.routers.watchtower-http.rule=${HOST_RULE}
+      - traefik.http.routers.watchtower-https.entrypoints=https
+      - traefik.http.routers.watchtower-https.rule=${HOST_RULE}
+      - traefik.http.routers.watchtower-https.tls=true
+      - traefik.http.routers.watchtower-https.tls.certresolver=cloudflare
 
 networks:
   watchtower:
