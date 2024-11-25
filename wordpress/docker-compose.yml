@@ -6,6 +6,7 @@ services:
     ports:
       - 88:80
     networks:
+      - wordpress
       - gateway
     volumes:
       - ${HTML_PATH}:/var/www/html:rw
@@ -17,7 +18,9 @@ services:
       - WORDPRESS_CONFIG_EXTRA=${WORDPRESS_CONFIG_EXTRA}
     labels:
       - traefik.enable=true
+      - traefik.docker.network=gateway
       - traefik.http.services.wordpress.loadbalancer.server.port=80
+      - traefik.http.services.wordpress.loadbalancer.server.scheme=http
       - traefik.http.routers.wordpress-http.entrypoints=http
       - traefik.http.routers.wordpress-http.rule=${HOST_RULE}
       - traefik.http.routers.wordpress-https.entrypoints=https
@@ -29,6 +32,8 @@ services:
     container_name: database
     image: mariadb:latest
     restart: unless-stopped
+    networks:
+      - wordpress
     volumes: 
       - ${MYSQL_PATH}:/var/lib/mysql:rw
     environment:
@@ -41,9 +46,13 @@ services:
     container_name: redis
     image: redis:latest
     restart: unless-stopped
+    networks:
+      - wordpress
     volumes: 
       - ${REDIS_PATH}:/data:rw
 
 networks:
+  wordpress:
+    driver: bridge
   gateway:
     external: true

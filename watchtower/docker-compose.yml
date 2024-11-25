@@ -18,7 +18,9 @@ services:
       - WATCHTOWER_HTTP_API_TOKEN=${WATCHTOWER_HTTP_API_TOKEN}
     labels:
       - traefik.enable=true
+      - traefik.docker.network=gateway
       - traefik.http.services.watchtower.loadbalancer.server.port=8080
+      - traefik.http.services.watchtower.loadbalancer.server.scheme=http
       - traefik.http.routers.watchtower-http.entrypoints=http
       - traefik.http.routers.watchtower-http.rule=${HOST_RULE}
       - traefik.http.routers.watchtower-https.entrypoints=https

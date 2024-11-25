@@ -11,7 +11,9 @@ services:
       - ${UPTIMEKUMA_DATA_PATH}:/app/data:rw
     labels:
       - traefik.enable=true
+      - traefik.docker.network=gateway
       - traefik.http.services.uptimekuma.loadbalancer.server.port=3001
+      - traefik.http.services.uptimekuma.loadbalancer.server.scheme=http
       - traefik.http.routers.uptimekuma-http.entrypoints=http
       - traefik.http.routers.uptimekuma-http.rule=${HOST_RULE}
       - traefik.http.routers.uptimekuma-https.entrypoints=https

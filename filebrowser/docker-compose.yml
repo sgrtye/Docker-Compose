@@ -14,7 +14,9 @@ services:
       - TZ=${TZ}
     labels:
       - traefik.enable=true
+      - traefik.docker.network=gateway
       - traefik.http.services.filebrowser.loadbalancer.server.port=80
+      - traefik.http.services.filebrowser.loadbalancer.server.scheme=http
       - traefik.http.routers.filebrowser-http.entrypoints=http
       - traefik.http.routers.filebrowser-http.rule=${HOST_RULE}
       - traefik.http.routers.filebrowser-https.entrypoints=https
