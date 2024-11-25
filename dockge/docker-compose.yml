@@ -1,0 +1,14 @@
+services:
+  dockge:
+    container_name: dockge
+    image: louislam/dockge:1
+    restart: unless-stopped
+    ports:
+      - 5001:5001
+    volumes:
+      - ${DOCKER_SOCK}:/var/run/docker.sock:rw
+      - ${DOCKGE_DATA_PATH}:/app/data:rw
+      - ${DOCKGE_STACK_PATH}:/opt/stacks:rw
+      - ${DOCKER_CONFIG_PATH}:/root/.docker/config.json:ro
+    environment:
+      - DOCKGE_STACKS_DIR=/opt/stacks
