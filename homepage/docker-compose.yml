@@ -3,8 +3,8 @@ services:
     container_name: homepage
     image: ghcr.io/gethomepage/homepage:latest
     restart: unless-stopped
-    # ports:
-    #   - 3000:3000
+    ports:
+      - 3000:3000
     networks:
       - gateway
     volumes:

@@ -3,8 +3,8 @@ services:
     container_name: wordpress
     image: wordpress:latest
     restart: unless-stopped
-    # ports:
-    #   - 88:80
+    ports:
+      - 88:80
     networks:
       - wordpress
       - gateway

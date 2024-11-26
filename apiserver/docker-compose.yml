@@ -3,8 +3,8 @@ services:
     container_name: apiserver
     image: sgrtye/apiserver:latest
     restart: unless-stopped
-    # ports:
-    #   - 8888:80
+    ports:
+      - 8888:80
     networks:
       - gateway
     volumes:

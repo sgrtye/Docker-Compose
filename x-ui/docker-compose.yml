@@ -16,8 +16,8 @@ services:
     container_name: xuiserver
     image: nginx:latest
     restart: unless-stopped
-    # ports:
-    #   - 8088:80
+    ports:
+      - 8088:80
     networks:
       - xui
       - gateway
