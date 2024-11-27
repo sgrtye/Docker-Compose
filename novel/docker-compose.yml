@@ -2,7 +2,7 @@ services:
   novel:
     container_name: novel
     image: sgrtye/novel:latest
-    restart: unless-stopped
+    restart: no
     ports:
       - 8008:80
     networks:
