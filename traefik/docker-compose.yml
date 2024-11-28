@@ -19,24 +19,15 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=gateway
-      - traefik.http.middlewares.auth-v1.basicauth.users=${AUTH_V1_CREDENTIALS}
       - traefik.http.services.traefik.loadbalancer.server.port=8080
       - traefik.http.routers.traefik-http.entrypoints=http
       - traefik.http.routers.traefik-http.rule=${HOST_RULE}
-      - traefik.http.routers.traefik-http.middlewares=auth-v1
+      - traefik.http.routers.traefik-http.middlewares=auth-v1@file
       - traefik.http.routers.traefik-https.entrypoints=https
       - traefik.http.routers.traefik-https.rule=${HOST_RULE}
-      - traefik.http.routers.traefik-https.middlewares=auth-v1
+      - traefik.http.routers.traefik-https.middlewares=auth-v1@file
       - traefik.http.routers.traefik-https.tls=true
       - traefik.http.routers.traefik-https.tls.certresolver=cloudflare
-      - traefik.http.routers.traefik-https.tls.domains[0].main=${DOMAIN_0}
-      - traefik.http.routers.traefik-https.tls.domains[1].main=${DOMAIN_1}
-      - traefik.http.routers.traefik-https.tls.domains[2].main=${DOMAIN_2}
-      - traefik.http.routers.traefik-https.tls.domains[3].main=${DOMAIN_3}
-      - traefik.http.routers.traefik-https.tls.domains[0].sans=*.${DOMAIN_0}
-      - traefik.http.routers.traefik-https.tls.domains[1].sans=*.${DOMAIN_1}
-      - traefik.http.routers.traefik-https.tls.domains[2].sans=*.${DOMAIN_2}
-      - traefik.http.routers.traefik-https.tls.domains[3].sans=*.${DOMAIN_3}
       - traefik.http.routers.traefik-https.service=api@internal
 
 networks:

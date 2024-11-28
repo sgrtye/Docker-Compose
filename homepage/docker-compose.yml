@@ -19,10 +19,10 @@ services:
       - traefik.http.services.homepage.loadbalancer.server.scheme=http
       - traefik.http.routers.homepage-http.entrypoints=http
       - traefik.http.routers.homepage-http.rule=${HOST_RULE}
-      - traefik.http.routers.homepage-http.middlewares=auth-v1
+      - traefik.http.routers.homepage-http.middlewares=auth-v1@file
       - traefik.http.routers.homepage-https.entrypoints=https
       - traefik.http.routers.homepage-https.rule=${HOST_RULE}
-      - traefik.http.routers.homepage-https.middlewares=auth-v1
+      - traefik.http.routers.homepage-https.middlewares=auth-v1@file
       - traefik.http.routers.homepage-https.tls=true
       - traefik.http.routers.homepage-https.tls.certresolver=cloudflare
 
