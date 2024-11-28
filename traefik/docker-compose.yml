@@ -19,6 +19,8 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=gateway
+      - traefik.http.services.traefik.loadbalancer.server.port=8080
+      - traefik.http.services.traefik.loadbalancer.server.scheme=http
       - traefik.http.routers.traefik-http.entrypoints=http
       - traefik.http.routers.traefik-http.rule=${HOST_RULE}
       - traefik.http.routers.traefik-http.middlewares=auth-v1@file
