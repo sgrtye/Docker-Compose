@@ -6,6 +6,7 @@ services:
     ports:
       - 8800:80
     networks:
+      - filebrowser
       - gateway
     volumes:
       - ${FILEBROWSER_FILE_PATH}:/srv:rw
@@ -25,5 +26,7 @@ services:
       - traefik.http.routers.filebrowser-https.tls.certresolver=cloudflare
 
 networks:
+  filebrowser:
+    driver: bridge
   gateway:
     external: true

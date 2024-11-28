@@ -8,6 +8,7 @@ services:
       - 443:443
       # - 8080:8080
     networks:
+      - traefik
       - gateway
     volumes:
       - ${DOCKER_SOCK}:/run/docker.sock:ro
@@ -17,6 +18,7 @@ services:
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
     labels:
       - traefik.enable=true
+      - traefik.docker.network=gateway
       - traefik.http.middlewares.auth-v1.basicauth.users=${AUTH_V1_CREDENTIALS}
       - traefik.http.services.traefik.loadbalancer.server.port=8080
       - traefik.http.routers.traefik-http.entrypoints=http
@@ -38,5 +40,7 @@ services:
       - traefik.http.routers.traefik-https.service=api@internal
 
 networks:
+  traefik:
+    driver: bridge
   gateway:
     external: true

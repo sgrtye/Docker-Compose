@@ -3,5 +3,11 @@ services:
     container_name: oci
     image: sgrtye/oci:latest
     restart: unless-stopped
+    networks:
+      - oci
     volumes:
       - ${OCI_ENV_PATH}:/app/env:ro
+
+networks:
+  oci:
+    driver: bridge
