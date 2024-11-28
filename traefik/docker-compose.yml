@@ -22,7 +22,7 @@ services:
       - traefik.http.routers.traefik-http.entrypoints=http
       - traefik.http.routers.traefik-http.rule=${HOST_RULE}
       - traefik.http.routers.traefik-http.middlewares=auth-v1@file
-      - traefik.http.routers.traefik-https.service=api@internal
+      - traefik.http.routers.traefik-http.service=api@internal
       - traefik.http.routers.traefik-https.entrypoints=https
       - traefik.http.routers.traefik-https.rule=${HOST_RULE}
       - traefik.http.routers.traefik-https.middlewares=auth-v1@file
