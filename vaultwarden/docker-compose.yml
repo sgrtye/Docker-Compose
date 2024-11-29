@@ -9,7 +9,7 @@ services:
       - vaultwarden
       - gateway
     environment:
-      - DOMAIN=${DOMAIN}
+      - SIGNUPS_ALLOWED=false
     volumes:
       - ${VAULTWARDEN_DATA_PATH}:/data:rw
     labels:
