@@ -8,7 +8,7 @@ services:
     networks:
       - dockge
     volumes:
-      - ${DOCKER_SOCK}:/var/run/docker.sock:rw
+      - /var/run/docker.sock:/var/run/docker.sock:rw
       - ${DOCKGE_DATA_PATH}:/app/data:rw
       - ${DOCKGE_STACK_PATH}:/opt/stacks:rw
       - ${DOCKER_CONFIG_PATH}:/root/.docker/config.json:ro

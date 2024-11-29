@@ -9,8 +9,8 @@ services:
       - watchtower
       - gateway
     volumes:
-      - ${DOCKER_SOCK}:/var/run/docker.sock:rw
-      - ${DOCKER_CONFIG_PATH}:/config.json:ro
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /root/.docker/config.json:/config.json:ro
     environment:
       - TZ=${TZ}
       - WATCHTOWER_CLEANUP=${WATCHTOWER_CLEANUP}

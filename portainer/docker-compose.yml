@@ -9,7 +9,7 @@ services:
       - portainer
       - gateway
     volumes:
-      - ${DOCKER_SOCK}:/var/run/docker.sock:rw
+      - /var/run/docker.sock:/var/run/docker.sock:rw
       - ${PORTAINER_DATA_PATH}:/data:rw
     labels:
       - traefik.enable=true

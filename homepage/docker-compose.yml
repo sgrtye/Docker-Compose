@@ -9,7 +9,7 @@ services:
       - homepage
       - gateway
     volumes:
-      - ${DOCKER_SOCK}:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${HOMEPAGE_CONFIG_PATH}:/app/config:ro
       - ${HOMEPAGE_IMAGE_PATH}:/app/public/images:ro
     labels:

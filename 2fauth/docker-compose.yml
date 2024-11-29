@@ -11,7 +11,7 @@ services:
     volumes:
       - ${AUTH_DATA_PATH}:/2fauth:rw
     environment:
-      - TRUSTED_PROXIES=${TRUSTED_PROXIES}
+      - TRUSTED_PROXIES=*
       - APP_URL=${APP_URL}
       - ASSET_URL=${ASSET_URL}
     labels:

@@ -6,6 +6,6 @@ services:
     pid: host
     network_mode: host
     volumes:
-      - ${DOCKER_SOCK}:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
-      - GLANCES_OPT=${GLANCES_OPT}
+      - GLANCES_OPT=-w
