@@ -12,9 +12,9 @@ services:
       - TZ=${TZ}
       - XRAY_VMESS_AEAD_FORCED=${XRAY_VMESS_AEAD_FORCED}
 
-  xuiserver:
-    container_name: xuiserver
-    image: nginx:latest
+  shadowgate:
+    container_name: shadowgate
+    image: sgrtye/shadowgate:latest
     restart: unless-stopped
     ports:
       - 8088:80
@@ -22,8 +22,16 @@ services:
       - xui
       - gateway
     volumes:
-      - ${HTML_PATH}:/var/www/html:ro
-      - ${NGINX_CONFIG_PATH}:/etc/nginx/conf.d:ro
+      - ${WEBSITE_PATH}:/website:ro
+      - ${CONFIG_FILES_PATH}:/conf:rw
+    environment:
+      - PROXY_HOST=${PROXY_HOST}
+      - PROXY_PORT=${PROXY_PORT}
+      - PROXY_PATH=${PROXY_PATH}
+      - HOST_DOMAIN=${HOST_DOMAIN}
+      - XUI_USERNAME=${XUI_USERNAME}
+      - XUI_PASSWORD=${XUI_PASSWORD}
+      - MITCE_URL=${MITCE_URL}
     labels:
       - traefik.enable=true
       - traefik.docker.network=gateway
@@ -35,22 +43,6 @@ services:
       - traefik.http.routers.x-ui-https.rule=${HOST_RULE}
       - traefik.http.routers.x-ui-https.tls=true
       - traefik.http.routers.x-ui-https.tls.certresolver=cloudflare
-
-  submanager:
-    container_name: submanager
-    image: sgrtye/submanager:latest
-    restart: unless-stopped
-    networks:
-      - xui
-    volumes:
-      - ${SUB_PATH}:/sub:rw
-      - ${NGINX_CONFIG_PATH}:/conf.d:rw
-    environment:
-      - XUI_USERNAME=${XUI_USERNAME}
-      - XUI_PASSWORD=${XUI_PASSWORD}
-      - XUI_URL=${XUI_URL}
-      - HOST_DOMAIN=${HOST_DOMAIN}
-      - MITCE_URL=${MITCE_URL}
 
 networks:
   xui:
