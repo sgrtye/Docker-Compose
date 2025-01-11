@@ -24,6 +24,7 @@ services:
     volumes:
       - ${WEBSITE_PATH}:/website:ro
       - ${CONFIG_FILES_PATH}:/conf:rw
+      - ${LOG_FILES_PATH}:/logs:rw
     environment:
       - PROXY_HOST=${PROXY_HOST}
       - PROXY_PORT=${PROXY_PORT}
