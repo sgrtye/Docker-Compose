@@ -12,10 +12,9 @@ services:
       - cache:/cache:rw
       - ${NOVEL_CONFIG_PATH}:/config:ro
     environment:
+      - PROXY_URL=${PROXY_URL}
       - TELEBOT_TOKEN=${TELEBOT_TOKEN}
       - TELEBOT_USER_ID=${TELEBOT_USER_ID}
-      - BOOK_URL=${BOOK_URL}
-      - PROXY_URL=${PROXY_URL}
     labels:
       - traefik.enable=true
       - traefik.docker.network=gateway
