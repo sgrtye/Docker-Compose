@@ -3,7 +3,7 @@
 services:
   immich-server:
     container_name: ich-server
-    image: ghcr.io/immich-app/immich-server:v1.121.0
+    image: ghcr.io/immich-app/immich-server:v1.130.0
     restart: unless-stopped
     ports:
       - 2283:2283
@@ -24,7 +24,7 @@ services:
 
   immich-machine-learning:
     container_name: ich-ml
-    image: ghcr.io/immich-app/immich-machine-learning:v1.121.0
+    image: ghcr.io/immich-app/immich-machine-learning:v1.130.0
     restart: unless-stopped
     networks:
       - immich
@@ -39,7 +39,7 @@ services:
 
   redis:
     container_name: ich-redis
-    image: docker.io/redis:6.2-alpine@sha256:eaba718fecd1196d88533de7ba49bf903ad33664a92debb24660a922ecd9cac8
+    image: docker.io/redis:6.2-alpine@sha256:148bb5411c184abd288d9aaed139c98123eeb8824c5d3fce03cf721db58066d8
     restart: unless-stopped
     networks:
       - immich
@@ -50,7 +50,7 @@ services:
 
   database:
     container_name: ich-postgres
-    image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
+    image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:739cdd626151ff1f796dc95a6591b55a714f341c737e27f045019ceabf8e8c52
     restart: unless-stopped
     networks:
       - immich
