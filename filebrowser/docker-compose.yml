@@ -10,7 +10,8 @@ services:
       - gateway
     volumes:
       - ${FILEBROWSER_FILE_PATH}:/srv:rw
-      - ${FILEBROWSER_DATABASE_PATH}:/database.db:rw
+      - ${FILEBROWSER_SETTING_PATH}:/config:rw
+      - ${FILEBROWSER_DATABASE_PATH}:/database:rw
     environment:
       - TZ=${TZ}
     labels:
