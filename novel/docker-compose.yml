@@ -12,6 +12,7 @@ services:
       - cache:/cache:rw
       - ${NOVEL_CONFIG_PATH}:/config:ro
     environment:
+      - TZ=${TZ}
       - PROXY_URL=${PROXY_URL}
       - TELEBOT_TOKEN=${TELEBOT_TOKEN}
       - TELEBOT_USER_ID=${TELEBOT_USER_ID}

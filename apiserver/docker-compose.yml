@@ -11,6 +11,7 @@ services:
     volumes:
       - cache:/cache:rw
     environment:
+      - TZ=${TZ}
       - XUI_USERNAME=${XUI_USERNAME}
       - XUI_PASSWORD=${XUI_PASSWORD}
       - XUI_URL=${XUI_URL}

@@ -26,6 +26,7 @@ services:
       - ${CONFIG_FILES_PATH}:/conf:rw
       - ${LOG_FILES_PATH}:/logs:rw
     environment:
+      - TZ=${TZ}
       - PROXY_HOST=${PROXY_HOST}
       - PROXY_PORT=${PROXY_PORT}
       - PROXY_PATH=${PROXY_PATH}

@@ -8,6 +8,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw
     environment:
+      - TZ=${TZ}
       - TELEBOT_TOKEN=${TELEBOT_TOKEN}
       - TELEBOT_USER_ID=${TELEBOT_USER_ID}
       - NOVEL_URL=${NOVEL_URL}
