@@ -10,7 +10,7 @@ services:
       - gateway
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${HOMEPAGE_CONFIG_PATH}:/app/config:ro
+      - ${HOMEPAGE_CONFIG_PATH}:/app/config:rw
       - ${HOMEPAGE_IMAGE_PATH}:/app/public/images:ro
     environment:
       - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
