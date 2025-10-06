@@ -1,0 +1,51 @@
+services:
+  s-ui:
+    container_name: s-ui
+    image: alireza7/s-ui:latest
+    hostname: ${SUI_HOSTNAME}
+    restart: unless-stopped
+    networks:
+      - s-ui
+    volumes:
+      - ${SUI_DATABASE_PATH}:/app/db:rw
+    environment:
+      - TZ=${TZ}
+
+  shadowgate:
+    container_name: shadowgate
+    image: sgrtye/shadowgate:latest
+    restart: unless-stopped
+    ports:
+      - 8088:80
+    networks:
+      - s-ui
+      - gateway
+    volumes:
+      - ${WEBSITE_PATH}:/website:ro
+      - ${CONFIG_FILES_PATH}:/conf:rw
+      - ${LOG_FILES_PATH}:/logs:rw
+    environment:
+      - TZ=${TZ}
+      - SUI_TOKEN=${SUI_TOKEN}
+      - MITCE_URL=${MITCE_URL}
+      - PROXY_HOST=${PROXY_HOST}
+      - PROXY_PORT=${PROXY_PORT}
+      - PROXY_PATH=${PROXY_PATH}
+      - HOST_DOMAIN=${HOST_DOMAIN}
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=gateway
+      - traefik.http.services.s-ui.loadbalancer.server.port=80
+      - traefik.http.services.s-ui.loadbalancer.server.scheme=http
+      - traefik.http.routers.s-ui-http.entrypoints=http
+      - traefik.http.routers.s-ui-http.rule=${HOST_RULE}
+      - traefik.http.routers.s-ui-https.entrypoints=https
+      - traefik.http.routers.s-ui-https.rule=${HOST_RULE}
+      - traefik.http.routers.s-ui-https.tls=true
+      - traefik.http.routers.s-ui-https.tls.certresolver=cloudflare
+
+networks:
+  s-ui:
+    driver: bridge
+  gateway:
+    external: true
