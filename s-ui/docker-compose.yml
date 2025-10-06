@@ -7,7 +7,7 @@ services:
     networks:
       - s-ui
     volumes:
-      - s-ui:/s-ui:rw
+      - s-ui:s-ui:rw
       - ${SUI_DATABASE_PATH}:/app/db:rw
     environment:
       - TZ=${TZ}
