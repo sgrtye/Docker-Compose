@@ -7,7 +7,6 @@ services:
     networks:
       - s-ui
     volumes:
-      - s-ui:s-ui:rw
       - ${SUI_DATABASE_PATH}:/app/db:rw
     environment:
       - TZ=${TZ}
@@ -44,9 +43,6 @@ services:
       - traefik.http.routers.s-ui-https.rule=${HOST_RULE}
       - traefik.http.routers.s-ui-https.tls=true
       - traefik.http.routers.s-ui-https.tls.certresolver=cloudflare
-
-volumes:
-  s-ui:
 
 networks:
   s-ui:
