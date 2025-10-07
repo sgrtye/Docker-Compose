@@ -12,9 +12,8 @@ services:
       - cache:/cache:rw
     environment:
       - TZ=${TZ}
-      - XUI_USERNAME=${XUI_USERNAME}
-      - XUI_PASSWORD=${XUI_PASSWORD}
-      - XUI_URL=${XUI_URL}
+      - SUI_URL=${SUI_URL}
+      - SUI_TOKEN=${SUI_TOKEN}
     labels:
       - traefik.enable=true
       - traefik.docker.network=gateway
