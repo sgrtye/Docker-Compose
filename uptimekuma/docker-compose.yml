@@ -1,7 +1,7 @@
 services:
   uptimekuma:
     container_name: uptimekuma
-    image: louislam/uptime-kuma:latest
+    image: louislam/uptime-kuma:beta-slim
     restart: unless-stopped
     ports:
       - 3001:3001
