@@ -7,30 +7,15 @@ services:
       - 8888:80
     networks:
       - apiserver
-      - gateway
     volumes:
       - cache:/cache:rw
     environment:
       - TZ=${TZ}
       - SUI_URL=${SUI_URL}
       - SUI_TOKEN=${SUI_TOKEN}
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=gateway
-      - traefik.http.services.apiserver.loadbalancer.server.port=80
-      - traefik.http.services.apiserver.loadbalancer.server.scheme=http
-      - traefik.http.routers.apiserver-http.entrypoints=http
-      - traefik.http.routers.apiserver-http.rule=${HOST_RULE}
-      - traefik.http.routers.apiserver-https.entrypoints=https
-      - traefik.http.routers.apiserver-https.rule=${HOST_RULE}
-      - traefik.http.routers.apiserver-https.tls=true
-      - traefik.http.routers.apiserver-https.tls.certresolver=cloudflare
-
 volumes:
   cache:
 
 networks:
   apiserver:
     driver: bridge
-  gateway:
-    external: true

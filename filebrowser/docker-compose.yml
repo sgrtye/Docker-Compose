@@ -7,27 +7,13 @@ services:
       - 8800:80
     networks:
       - filebrowser
-      - gateway
     volumes:
       - ${FILEBROWSER_FILE_PATH}:/srv:rw
       - ${FILEBROWSER_SETTING_PATH}:/config:rw
       - ${FILEBROWSER_DATABASE_PATH}:/database:rw
     environment:
       - TZ=${TZ}
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=gateway
-      - traefik.http.services.filebrowser.loadbalancer.server.port=80
-      - traefik.http.services.filebrowser.loadbalancer.server.scheme=http
-      - traefik.http.routers.filebrowser-http.entrypoints=http
-      - traefik.http.routers.filebrowser-http.rule=${HOST_RULE}
-      - traefik.http.routers.filebrowser-https.entrypoints=https
-      - traefik.http.routers.filebrowser-https.rule=${HOST_RULE}
-      - traefik.http.routers.filebrowser-https.tls=true
-      - traefik.http.routers.filebrowser-https.tls.certresolver=cloudflare
 
 networks:
   filebrowser:
     driver: bridge
-  gateway:
-    external: true

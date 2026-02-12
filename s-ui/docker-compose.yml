@@ -19,7 +19,6 @@ services:
       - 8088:80
     networks:
       - s-ui
-      - gateway
     volumes:
       - ${WEBSITE_PATH}:/website:ro
       - ${CONFIG_FILES_PATH}:/conf:rw
@@ -32,20 +31,7 @@ services:
       - PROXY_PORT=${PROXY_PORT}
       - PROXY_PATH=${PROXY_PATH}
       - HOST_DOMAIN=${HOST_DOMAIN}
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=gateway
-      - traefik.http.services.s-ui.loadbalancer.server.port=80
-      - traefik.http.services.s-ui.loadbalancer.server.scheme=http
-      - traefik.http.routers.s-ui-http.entrypoints=http
-      - traefik.http.routers.s-ui-http.rule=${HOST_RULE}
-      - traefik.http.routers.s-ui-https.entrypoints=https
-      - traefik.http.routers.s-ui-https.rule=${HOST_RULE}
-      - traefik.http.routers.s-ui-https.tls=true
-      - traefik.http.routers.s-ui-https.tls.certresolver=cloudflare
 
 networks:
   s-ui:
     driver: bridge
-  gateway:
-    external: true

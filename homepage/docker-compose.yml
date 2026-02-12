@@ -7,29 +7,13 @@ services:
       - 3000:3000
     networks:
       - homepage
-      - gateway
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${HOMEPAGE_CONFIG_PATH}:/app/config:rw
       - ${HOMEPAGE_IMAGE_PATH}:/app/public/images:ro
     environment:
       - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=gateway
-      - traefik.http.services.homepage.loadbalancer.server.port=3000
-      - traefik.http.services.homepage.loadbalancer.server.scheme=http
-      - traefik.http.routers.homepage-http.entrypoints=http
-      - traefik.http.routers.homepage-http.rule=${HOST_RULE}
-      - traefik.http.routers.homepage-http.middlewares=auth-v1@file
-      - traefik.http.routers.homepage-https.entrypoints=https
-      - traefik.http.routers.homepage-https.rule=${HOST_RULE}
-      - traefik.http.routers.homepage-https.middlewares=auth-v1@file
-      - traefik.http.routers.homepage-https.tls=true
-      - traefik.http.routers.homepage-https.tls.certresolver=cloudflare
 
 networks:
   homepage:
     driver: bridge
-  gateway:
-    external: true

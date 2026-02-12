@@ -7,7 +7,6 @@ services:
       - 8000:8000
     networks:
       - 2fauth
-      - gateway
     volumes:
       - ${AUTH_DATA_PATH}:/2fauth:rw
     environment:
@@ -15,20 +14,7 @@ services:
       - APP_KEY=${APP_KEY}
       - APP_URL=${APP_URL}
       - ASSET_URL=${ASSET_URL}
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=gateway
-      - traefik.http.services.2fauth.loadbalancer.server.port=8000
-      - traefik.http.services.2fauth.loadbalancer.server.scheme=http
-      - traefik.http.routers.2fauth-http.entrypoints=http
-      - traefik.http.routers.2fauth-http.rule=${HOST_RULE}
-      - traefik.http.routers.2fauth-https.entrypoints=https
-      - traefik.http.routers.2fauth-https.rule=${HOST_RULE}
-      - traefik.http.routers.2fauth-https.tls=true
-      - traefik.http.routers.2fauth-https.tls.certresolver=cloudflare
 
 networks:
   2fauth:
     driver: bridge
-  gateway:
-    external: true

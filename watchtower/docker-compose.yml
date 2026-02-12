@@ -7,7 +7,6 @@ services:
       - 8080:8080
     networks:
       - watchtower
-      - gateway
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw
       - /root/.docker/config.json:/config.json:ro
@@ -17,20 +16,7 @@ services:
       - WATCHTOWER_SCHEDULE=${WATCHTOWER_SCHEDULE}
       - WATCHTOWER_HTTP_API_METRICS=${WATCHTOWER_HTTP_API_METRICS}
       - WATCHTOWER_HTTP_API_TOKEN=${WATCHTOWER_HTTP_API_TOKEN}
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=gateway
-      - traefik.http.services.watchtower.loadbalancer.server.port=8080
-      - traefik.http.services.watchtower.loadbalancer.server.scheme=http
-      - traefik.http.routers.watchtower-http.entrypoints=http
-      - traefik.http.routers.watchtower-http.rule=${HOST_RULE}
-      - traefik.http.routers.watchtower-https.entrypoints=https
-      - traefik.http.routers.watchtower-https.rule=${HOST_RULE}
-      - traefik.http.routers.watchtower-https.tls=true
-      - traefik.http.routers.watchtower-https.tls.certresolver=cloudflare
 
 networks:
   watchtower:
     driver: bridge
-  gateway:
-    external: true
