@@ -1,0 +1,12 @@
+services:
+  cfddns:
+    container_name: cfddns
+    image: favonia/cloudflare-ddns:latest
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
+      - DOMAINS=${DOMAINS}
+      - PROXIED=${PROXIED}
+      - IP4_PROVIDER=${IP4_PROVIDER}
+      - IP6_PROVIDER=${IP6_PROVIDER}
