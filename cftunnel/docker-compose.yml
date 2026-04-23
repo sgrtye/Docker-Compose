@@ -1,7 +1,7 @@
 services:
   cftunnel:
     container_name: cftunnel
-    image: cloudflare/cloudflared:latest
+    image: ${APP_IMAGE:-cloudflare/cloudflared:latest}
     restart: unless-stopped
     command: tunnel run
     network_mode: host

@@ -1,7 +1,7 @@
 services:
   traefik:
     container_name: traefik
-    image: traefik:v3
+    image: ${APP_IMAGE:-traefik:v3}
     restart: unless-stopped
     ports:
       - 80:80

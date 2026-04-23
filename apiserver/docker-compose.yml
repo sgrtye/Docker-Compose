@@ -1,7 +1,7 @@
 services:
   apiserver:
     container_name: apiserver
-    image: sgrtye/apiserver:latest
+    image: ${APP_IMAGE:-sgrtye/apiserver:latest}
     restart: unless-stopped
     ports:
       - 8888:80

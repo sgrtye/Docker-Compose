@@ -1,7 +1,7 @@
 services:
   cfddns:
     container_name: cfddns
-    image: favonia/cloudflare-ddns:latest
+    image: ${APP_IMAGE:-favonia/cloudflare-ddns:latest}
     restart: unless-stopped
     network_mode: host
     environment:

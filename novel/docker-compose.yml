@@ -1,7 +1,7 @@
 services:
   novel:
     container_name: novel
-    image: sgrtye/novel:latest
+    image: ${APP_IMAGE:-sgrtye/novel:latest}
     restart: no
     ports:
       - 8008:80

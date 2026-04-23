@@ -1,7 +1,7 @@
 services:
   telebot:
     container_name: telebot
-    image: sgrtye/telebot:latest
+    image: ${APP_IMAGE:-sgrtye/telebot:latest}
     restart: unless-stopped
     networks:
       - telebot

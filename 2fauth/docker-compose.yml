@@ -1,7 +1,7 @@
 services:
   2fauth:
     container_name: 2fauth
-    image: 2fauth/2fauth:latest
+    image: ${APP_IMAGE:-2fauth/2fauth:latest}
     restart: unless-stopped
     ports:
       - 8000:8000

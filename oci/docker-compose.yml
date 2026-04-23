@@ -1,7 +1,7 @@
 services:
   oci:
     container_name: oci
-    image: sgrtye/oci:latest
+    image: ${APP_IMAGE:-sgrtye/oci:latest}
     restart: unless-stopped
     networks:
       - oci

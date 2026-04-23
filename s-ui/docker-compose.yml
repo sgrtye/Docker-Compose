@@ -1,7 +1,7 @@
 services:
   s-ui:
     container_name: s-ui
-    image: alireza7/s-ui:latest
+    image: ${SUI_IMAGE:-alireza7/s-ui:latest}
     hostname: ${SUI_HOSTNAME}
     restart: unless-stopped
     networks:
@@ -13,7 +13,7 @@ services:
 
   shadowgate:
     container_name: shadowgate
-    image: sgrtye/shadowgate:latest
+    image: ${SHADOWGATE_IMAGE:-sgrtye/shadowgate:latest}
     restart: unless-stopped
     ports:
       - 8088:80

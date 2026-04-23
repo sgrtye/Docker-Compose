@@ -1,7 +1,7 @@
 services:
   dockge:
     container_name: dockge
-    image: louislam/dockge:latest
+    image: ${APP_IMAGE:-louislam/dockge:latest}
     restart: unless-stopped
     ports:
       - 5001:5001

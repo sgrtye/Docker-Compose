@@ -1,7 +1,7 @@
 services:
   wireguard:
     container_name: wireguard
-    image: lscr.io/linuxserver/wireguard:latest
+    image: ${APP_IMAGE:-lscr.io/linuxserver/wireguard:latest}
     restart: unless-stopped
     ports:
       - 51820:51820/udp

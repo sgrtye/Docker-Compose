@@ -1,7 +1,7 @@
 services:
   portainer:
     container_name: portainer
-    image: portainer/portainer-ee:sts
+    image: ${APP_IMAGE:-portainer/portainer-ee:sts}
     restart: unless-stopped
     ports:
       - 9443:9443

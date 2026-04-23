@@ -1,7 +1,7 @@
 services:
   vaultwarden:
     container_name: vaultwarden
-    image: vaultwarden/server:latest
+    image: ${APP_IMAGE:-vaultwarden/server:latest}
     restart: unless-stopped
     ports:
       - 888:80
