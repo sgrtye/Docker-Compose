@@ -1,0 +1,27 @@
+services:
+  portainer:
+    container_name: portainer
+    image: ${APP_IMAGE:-portainer/portainer-ee:sts}
+    restart: unless-stopped
+    ports:
+      - 9000:9000
+    networks:
+      - portainer
+      - gateway
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - ${PORTAINER_DATA_PATH}:/data:rw
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=gateway
+      - traefik.http.services.portainer.loadbalancer.server.port=9000
+      - traefik.http.services.portainer.loadbalancer.server.scheme=http
+      - traefik.http.routers.portainer-https.entrypoints=websecure
+      - traefik.http.routers.portainer-https.rule=${HOST_RULE}
+      - traefik.http.routers.portainer-https.tls=true
+
+networks:
+  portainer:
+    driver: bridge
+  gateway:
+    external: true
