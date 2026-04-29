@@ -16,8 +16,6 @@ jobs:
           fetch-depth: 0
 
       - name: Sync repo to Gitee
-        env:
-          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
         run: |
-          git remote add gitee https://sgrtye:${GITEE_TOKEN}@gitee.com/sgrtye/docker-compose.git
+          git remote add gitee https://sgrtye:${secrets.GITEE_TOKEN}@gitee.com/sgrtye/docker-compose.git
           git push gitee --mirror
