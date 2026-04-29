@@ -7,13 +7,22 @@ services:
       - 8888:8888
     networks:
       - traefik
+      - gateway
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${TRAEFIK_CONFIG_PATH}:/etc/traefik/traefik.yaml:ro
       - ${TRAEFIK_CERTS_PATH}:/var/traefik/certs:rw
+      - ${TRAEFIK_CONFIG_PATH}:/etc/traefik/traefik.yaml:ro
     environment:
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik-https.entrypoints=websecure
+      - traefik.http.routers.traefik-https.rule=${HOST_RULE}
+      - traefik.http.routers.traefik-https.service=api@internal
+      - traefik.http.routers.traefik-https.tls=true
 
 networks:
   traefik:
     driver: bridge
+  gateway:
+    external: true
