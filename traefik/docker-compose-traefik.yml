@@ -9,7 +9,7 @@ services:
       - traefik
       - gateway
     volumes:
-      - /var/run/docker.sock:/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${TRAEFIK_CONFIG_PATH}:/etc/traefik/traefik.yaml:ro
       - ${TRAEFIK_CERTS_PATH}:/var/traefik/certs:rw
     environment:
