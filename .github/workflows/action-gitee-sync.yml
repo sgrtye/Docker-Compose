@@ -1,0 +1,25 @@
+name: Sync pushes to Gitee
+
+on:
+  push:
+  delete:
+  workflow_dispatch:
+
+jobs:
+  Sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Sync repo to Gitee
+        env:
+          GITEA_REPO: ${{ secrets.GITEE_REPO }}
+          GITEA_USER: ${{ secrets.GITEE_USER }}
+          GITEA_TOKEN: ${{ secrets.GITEE_TOKEN }}
+        run: |
+          git remote add gitee https://${GITEE_USER}:${GITEE_TOKEN}@${GITEE_REPO}
+          git push gitee --mirror
