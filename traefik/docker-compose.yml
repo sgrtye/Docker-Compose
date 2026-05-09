@@ -11,7 +11,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${TRAEFIK_CERTS_PATH}:/var/traefik/certs:rw
-      - ${TRAEFIK_CONFIG_PATH}:/etc/traefik/traefik.yaml:ro
+      - ${TRAEFIK_DYNAMIC_CONFIG_PATH}:/var/traefik/config:ro
+      - ${TRAEFIK_STATIC_CONFIG_PATH}:/etc/traefik/traefik.yaml:ro
     environment:
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
     labels:
