@@ -4,7 +4,7 @@ services:
     image: ${APP_IMAGE:-traefik:v3}
     restart: unless-stopped
     ports:
-      - 8888:8888
+      - ${TRAEFIK_PORT}:443
     networks:
       - traefik
       - gateway
