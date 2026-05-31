@@ -9,6 +9,7 @@ services:
       - uptimekuma
     volumes:
       - ${UPTIMEKUMA_DATA_PATH}:/app/data:rw
+
 networks:
   uptimekuma:
     driver: bridge
