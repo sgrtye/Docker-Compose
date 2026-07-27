@@ -7,10 +7,13 @@ services:
       - 888:80
     networks:
       - vaultwarden
+    volumes:
+      - data:/data:rw
     environment:
       - SIGNUPS_ALLOWED=${SIGNUPS_ALLOWED}
-    volumes:
-      - ${VAULTWARDEN_DATA_PATH}:/data:rw
+
+volumes:
+  data:
 
 networks:
   vaultwarden:
