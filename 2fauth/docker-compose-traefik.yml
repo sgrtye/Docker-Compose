@@ -7,6 +7,7 @@ services:
       - 8000:8000
     networks:
       - 2fauth
+      - gateway
     volumes:
       - 2fauth:/2fauth:rw
     environment:
