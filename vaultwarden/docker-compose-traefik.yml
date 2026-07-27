@@ -1,0 +1,31 @@
+services:
+  vaultwarden:
+    container_name: vaultwarden
+    image: ${APP_IMAGE:-vaultwarden/server:latest}
+    restart: unless-stopped
+    ports:
+      - 888:80
+    networks:
+      - vaultwarden
+      - gateway
+    environment:
+      - SIGNUPS_ALLOWED=${SIGNUPS_ALLOWED}
+    volumes:
+      - data:/data:rw
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=gateway
+      - traefik.http.services.vaultwarden.loadbalancer.server.port=80
+      - traefik.http.services.vaultwarden.loadbalancer.server.scheme=http
+      - traefik.http.routers.vaultwarden-https.entrypoints=websecure
+      - traefik.http.routers.vaultwarden-https.rule=${HOST_RULE}
+      - traefik.http.routers.vaultwarden-https.tls=true
+
+volumes:
+  data:
+
+networks:
+  vaultwarden:
+    driver: bridge
+  gateway:
+    external: true

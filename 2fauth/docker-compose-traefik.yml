@@ -1,0 +1,32 @@
+services:
+  2fauth:
+    container_name: 2fauth
+    image: ${APP_IMAGE:-2fauth/2fauth:latest}
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    networks:
+      - 2fauth
+    volumes:
+      - 2fauth:/2fauth:rw
+    environment:
+      - TRUSTED_PROXIES=*
+      - APP_KEY=${APP_KEY}
+      - APP_URL=${APP_URL}
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=gateway
+      - traefik.http.services.2fauth.loadbalancer.server.port=80
+      - traefik.http.services.2fauth.loadbalancer.server.scheme=http
+      - traefik.http.routers.2fauth-https.entrypoints=websecure
+      - traefik.http.routers.2fauth-https.rule=${HOST_RULE}
+      - traefik.http.routers.2fauth-https.tls=true
+
+volumes:
+  2fauth:
+
+networks:
+  2fauth:
+    driver: bridge
+  gateway:
+    external: true
