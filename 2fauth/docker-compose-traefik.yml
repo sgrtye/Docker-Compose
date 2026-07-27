@@ -17,7 +17,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=gateway
-      - traefik.http.services.2fauth.loadbalancer.server.port=80
+      - traefik.http.services.2fauth.loadbalancer.server.port=8000
       - traefik.http.services.2fauth.loadbalancer.server.scheme=http
       - traefik.http.routers.2fauth-https.entrypoints=websecure
       - traefik.http.routers.2fauth-https.rule=${HOST_RULE}
