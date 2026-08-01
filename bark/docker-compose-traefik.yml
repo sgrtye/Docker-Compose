@@ -1,0 +1,29 @@
+services:
+  bark:
+    container_name: bark
+    image: ${APP_IMAGE:-finab/bark-server:latest}
+    restart: unless-stopped
+    ports:
+      - 808:8080
+    networks:
+      - bark
+      - gateway
+    volumes:
+      - data:/data:rw
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=gateway
+      - traefik.http.services.bark.loadbalancer.server.port=8080
+      - traefik.http.services.bark.loadbalancer.server.scheme=http
+      - traefik.http.routers.bark-https.entrypoints=websecure
+      - traefik.http.routers.bark-https.rule=${HOST_RULE}
+      - traefik.http.routers.bark-https.tls=true
+
+volumes:
+  data:
+
+networks:
+  bark:
+    driver: bridge
+  gateway:
+    external: true

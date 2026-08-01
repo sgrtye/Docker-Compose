@@ -1,0 +1,18 @@
+services:
+  bark:
+    container_name: bark
+    image: ${APP_IMAGE:-finab/bark-server:latest}
+    restart: unless-stopped
+    ports:
+      - 808:8080
+    networks:
+      - bark
+    volumes:
+      - data:/data:rw
+
+volumes:
+  data:
+
+networks:
+  bark:
+    driver: bridge
