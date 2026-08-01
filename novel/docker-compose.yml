@@ -12,6 +12,7 @@ services:
       - ${NOVEL_CONFIG_PATH}:/config:ro
     environment:
       - TZ=${TZ}
+      - BARK_URL=${BARK_URL}
       - SCRAPER_KEY=${SCRAPER_KEY}
       - TELEBOT_TOKEN=${TELEBOT_TOKEN}
       - TELEBOT_USER_ID=${TELEBOT_USER_ID}
