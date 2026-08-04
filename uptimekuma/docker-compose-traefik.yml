@@ -9,7 +9,7 @@ services:
       - uptimekuma
       - gateway
     volumes:
-      - ${UPTIMEKUMA_DATA_PATH}:/app/data:rw
+      - data:/app/data:rw
     labels:
       - traefik.enable=true
       - traefik.docker.network=gateway
@@ -18,6 +18,9 @@ services:
       - traefik.http.routers.uptimekuma-https.entrypoints=websecure
       - traefik.http.routers.uptimekuma-https.rule=${HOST_RULE}
       - traefik.http.routers.uptimekuma-https.tls=true
+
+volumes:
+  data:
 
 networks:
   uptimekuma:

@@ -8,7 +8,10 @@ services:
     networks:
       - uptimekuma
     volumes:
-      - ${UPTIMEKUMA_DATA_PATH}:/app/data:rw
+      - data:/app/data:rw
+
+volumes:
+  data:
 
 networks:
   uptimekuma:
