@@ -13,8 +13,8 @@ services:
       - PEERS=3
       - TZ=${TZ}
     volumes:
-      - ${WIREGUARD_CONFIG_PATH}:/config:rw
       - /lib/modules:/lib/modules:ro
+      - ${WIREGUARD_CONFIG_PATH}:/config:rw
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
