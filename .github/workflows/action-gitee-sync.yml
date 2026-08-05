@@ -1,26 +1,51 @@
-name: Sync pushes to Gitee
+name: Sync GitHub to Gitee
 
 on:
   push:
+    branches-ignore:
+      - 'dependabot/**'
+    tags:
+      - '*'
   delete:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  Sync:
-    if: github.actor != 'dependabot[bot]'
+  sync:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v7
+      - name: Check out repository
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
+          fetch-tags: true
 
-      - name: Sync repo to Gitee
+      - name: Sync repository to Gitee
+        shell: bash
         run: |
-          git remote remove gitee || true
+          set -euo pipefail
 
-          git remote add gitee https://sgrtye:${{ secrets.GITEE_TOKEN }}@gitee.com/sgrtye/docker-compose.git
+          git fetch origin \
+            '+refs/heads/*:refs/remotes/origin/*' \
+            '+refs/tags/*:refs/tags/*' \
+            --prune
 
-          git push gitee --all --force
-          git push gitee --tags --force
+          git remote set-head origin --delete || true
+
+          git remote remove gitee 2>/dev/null || true
+          git remote add gitee \
+            https://sgrtye:${{ secrets.GITEE_TOKEN }}@gitee.com/sgrtye/docker-compose.git
+
+          git push gitee \
+            --force \
+            --prune \
+            'refs/remotes/origin/*:refs/heads/*'
+
+          git push gitee \
+            --force \
+            --prune \
+            'refs/tags/*:refs/tags/*'
