@@ -3,8 +3,6 @@ services:
     container_name: bark
     image: ${APP_IMAGE:-finab/bark-server:latest}
     restart: unless-stopped
-    ports:
-      - 808:8080
     networks:
       - bark
       - gateway

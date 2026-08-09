@@ -3,8 +3,6 @@ services:
     container_name: vaultwarden
     image: ${APP_IMAGE:-vaultwarden/server:latest}
     restart: unless-stopped
-    ports:
-      - 888:80
     networks:
       - vaultwarden
       - gateway

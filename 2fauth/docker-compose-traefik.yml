@@ -3,8 +3,6 @@ services:
     container_name: 2fauth
     image: ${APP_IMAGE:-2fauth/2fauth:latest}
     restart: unless-stopped
-    ports:
-      - 8000:8000
     networks:
       - 2fauth
       - gateway
