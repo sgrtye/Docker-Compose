@@ -1,0 +1,32 @@
+services:
+  watchtower:
+    container_name: watchtower
+    image: ${APP_IMAGE:-nickfedor/watchtower:latest}
+    restart: unless-stopped
+    networks:
+      - watchtower
+      - gateway
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /root/.docker/config.json:/config.json:ro
+    environment:
+      - TZ=${TZ}
+      - WATCHTOWER_CLEANUP=${WATCHTOWER_CLEANUP}
+      - WATCHTOWER_SCHEDULE=${WATCHTOWER_SCHEDULE}
+      - WATCHTOWER_EPHEMERAL_SELF_UPDATE=${WATCHTOWER_EPHEMERAL_SELF_UPDATE}
+      - WATCHTOWER_HTTP_API_METRICS=${WATCHTOWER_HTTP_API_METRICS}
+      - WATCHTOWER_HTTP_API_TOKEN=${WATCHTOWER_HTTP_API_TOKEN}
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=gateway
+      - traefik.http.services.watchtower.loadbalancer.server.port=8080
+      - traefik.http.services.watchtower.loadbalancer.server.scheme=http
+      - traefik.http.routers.watchtower-https.entrypoints=websecure
+      - traefik.http.routers.watchtower-https.rule=${HOST_RULE}
+      - traefik.http.routers.watchtower-https.tls=true
+
+networks:
+  watchtower:
+    driver: bridge
+  gateway:
+    external: true
