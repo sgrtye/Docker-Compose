@@ -6,10 +6,10 @@ services:
     networks:
       - vaultwarden
       - gateway
-    environment:
-      - SIGNUPS_ALLOWED=${SIGNUPS_ALLOWED}
     volumes:
       - data:/data:rw
+    environment:
+      - SIGNUPS_ALLOWED=${SIGNUPS_ALLOWED}
     labels:
       - traefik.enable=true
       - traefik.docker.network=gateway

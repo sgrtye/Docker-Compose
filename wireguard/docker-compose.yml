@@ -7,14 +7,14 @@ services:
       - 51820:51820/udp
     networks:
       - wireguard
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      - ${WIREGUARD_CONFIG_PATH}:/config:rw
     environment:
       - PUID=1000
       - PGID=1000
       - PEERS=3
       - TZ=${TZ}
-    volumes:
-      - /lib/modules:/lib/modules:ro
-      - ${WIREGUARD_CONFIG_PATH}:/config:rw
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
