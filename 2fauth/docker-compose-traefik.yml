@@ -7,7 +7,7 @@ services:
       - 2fauth
       - gateway
     volumes:
-      - 2fauth:/2fauth:rw
+      - data:/2fauth:rw
     environment:
       - TRUSTED_PROXIES=*
       - APP_KEY=${APP_KEY}
@@ -22,7 +22,7 @@ services:
       - traefik.http.routers.2fauth-https.tls=true
 
 volumes:
-  2fauth:
+  data:
 
 networks:
   2fauth:
