@@ -1,0 +1,29 @@
+services:
+  filebrowser:
+    container_name: filebrowser
+    image: ${APP_IMAGE:-gtstef/filebrowser:2-stable-slim}
+    restart: unless-stopped
+    networks:
+      - filebrowser
+      - gateway
+    volumes:
+      - folder:/folder:rw
+      - data:/home/filebrowser/data:rw
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=gateway
+      - traefik.http.services.filebrowser.loadbalancer.server.port=80
+      - traefik.http.services.filebrowser.loadbalancer.server.scheme=http
+      - traefik.http.routers.filebrowser-https.entrypoints=websecure
+      - traefik.http.routers.filebrowser-https.rule=${HOST_RULE}
+      - traefik.http.routers.filebrowser-https.tls=true
+
+volumes:
+  folder:
+  data:
+
+networks:
+  filebrowser:
+    driver: bridge
+  gateway:
+    external: true
