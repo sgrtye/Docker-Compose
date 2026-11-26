@@ -1,18 +1,19 @@
 services:
   filebrowser:
     container_name: filebrowser
-    image: ${APP_IMAGE:-filebrowser/filebrowser:s6}
+    image: ${APP_IMAGE:-gtstef/filebrowser:2-stable-slim}
     restart: unless-stopped
     ports:
       - 8800:80
     networks:
       - filebrowser
     volumes:
-      - ${FILEBROWSER_FILE_PATH}:/srv:rw
-      - ${FILEBROWSER_SETTING_PATH}:/config:rw
-      - ${FILEBROWSER_DATABASE_PATH}:/database:rw
-    environment:
-      - TZ=${TZ}
+      - folder:/folder:rw
+      - data:/home/filebrowser/data:rw
+
+volumes:
+  folder:
+  data:
 
 networks:
   filebrowser:
